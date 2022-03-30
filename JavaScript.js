@@ -2,70 +2,73 @@ let butt = document.querySelectorAll('.num')
 let display = document.querySelector('.display')
 let add = document.querySelector('.add')
 let equal = document.querySelector('.equal')
+let calc = document.querySelectorAll('.calc')
 
 let runn= 0
 let enterNum=0
 let firstNum=0;
 let output=0
+
+let reset=0
 //Dodanie do wszystkich przyciskow liczbowych 
-for (let i = 0; i < butt.length; i++) {
-    butt[i].addEventListener("click", function () {
-      enterNum=i+enterNum*10
-      display.textContent=enterNum
-      console.log(enterNum)
-      console.log(firstNum)
-      console.log(runn)
-    });
-}
-//przycisk wybranego dzialania zapisuje pierwsza liczby i pozwala podac druga liczbe
-add.addEventListener('click',function (){
-    firstNum=enterNum;
-    enterNum=0
-    display.textContent='...';
-    runn='add'
+butt.forEach(mum=>{
+    mum.addEventListener('click',() => {
+        enterNum=Number(mum.textContent)+enterNum*10
+        display.textContent=enterNum
+        console.log(`firstNum: ${firstNum}`)
+        console.log(`enterNum: ${enterNum}`)  
+        
+    })
 })
 
+//przycisk wybranego dzialania zapisuje pierwsza liczby i pozwala podac druga liczbe
 //poprzez wybranie odpowiedniego dzialania zapisuje wybrane dzialanie
+calc.forEach(action=>{
+    action.addEventListener('click',()=> {
+        firstNum=enterNum;
+        enterNum=0
+        runn=action.textContent;
+    })
+})
+//przycisk dzialania ma dzialac rowniez jako '='
 
-
-
-function addNumbers(a,b){
-    console.log (a+b)
-}
-
-function substract(a,b){
-    console.log(a-b)
-}
-
-function multiply(a,b){
-    console.log(a*b)
-}   
-
-function divide(a,b){
-    console.log(a/b)
-}
-
-equal.addEventListener('click',function operate(a,b,run){
+//po klikniecu "=" uruchamia funkcje operate. Musi byc zapisana 1 i 2 liczba oraz rodzaj dzialania
+function operate(a,b,run){
     a=firstNum;
     b=enterNum;
     run=runn
-    if (run=='add'){
-        console.log (a+b)
-        display.textContent=a+b
+    if (run=='+'){
+        enterNum=a+b
+        console.log (enterNum)
+        display.textContent=enterNum
     }
-    else if (run=='substract'){
-        substract(a,b)
+    else if (run=='-'){
+        enterNum=a-b
+        console.log (enterNum)
+        display.textContent=enterNum
     }
-    else if (run=='multiply'){
-        multiply(a,b)
+    else if (run=='*'){
+        enterNum=a*b
+        console.log (enterNum)
+        display.textContent=enterNum
     }
-    else if (run=='divide'){
-        divide(a,b)
+    else if (run=='/'){
+        enterNum=a/b
+        console.log (enterNum)
+        display.textContent=enterNum
     }
     else {
         console.log('dupa')
     }
-})
+    
+    let reset=1
 
+    console.log(`first num: ${firstNum}`)
+    console.log(`enter num: ${enterNum}`)
+    console.log(`a: ${a}`)
+    console.log(`b: ${b}`)
 
-//po klikniecu "=" uruchamia funkcje operate. Musi byc zapisana 1 i 2 liczba oraz rodzaj dzialania
+}
+
+equal.addEventListener('click',operate)
+
