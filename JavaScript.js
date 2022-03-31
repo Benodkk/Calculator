@@ -5,11 +5,11 @@ let equal = document.querySelector('.equal')
 let calc = document.querySelectorAll('.calc')
 let clear =document.querySelector('.clear')
 let comma =document.querySelector('.comma')
+let backspace=document.querySelector('.backspace')
 
 let runn= 0
 let enterNum=0
 let firstNum=0;
-let output=0
 
 let reset =0
 let addComma=0
@@ -100,8 +100,8 @@ function operate(a,b,run){
 clear.addEventListener('click', function() {
     firstNum=0;
     enterNum=0;
-    finalNum=0;
     display.textContent=0;
+    addComma=0
 })
 
 

@@ -1,0 +1,44 @@
+button {
+    width:80px;
+    height:60px;
+}
+.clear {
+    width:160px;
+}
+.zero {
+    width: 160px;
+}
+.calculator {
+    display:flex;
+    flex-direction: column;
+    border: solid black 3px;
+    width: 320px;
+    background-color: black;
+    padding:5px
+}
+.display{
+    display: flex;
+    box-sizing:border-box;
+    font-size: 50px;
+    padding:5px 10px;
+    background-color: grey;
+    justify-content: end;
+    margin-bottom: 5px;
+}
+.buttons{
+    display:flex;
+}
+.write{
+    width:252px;
+}
+.delete{
+    display: flex;
+}
+.numbers{
+    display: flex;
+    flex-wrap: wrap;
+}
+.action{
+    display: flex;
+    flex-direction: column;
+}
