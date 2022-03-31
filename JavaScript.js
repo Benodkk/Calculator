@@ -40,9 +40,21 @@ comma.addEventListener('click',() =>{
         enterNum=enterNum+`.`;  
         display.textContent=enterNum;
         addComma=1;
-        console.log(enterNum)
 }
 })
+
+backspace.addEventListener('click',() =>{
+    enterNum=enterNum.toString();
+    enterNum=enterNum.substr(0,enterNum.length-1);
+    enterNum=Number(enterNum)
+    display.textContent=enterNum;
+    
+
+})
+
+let dupa = 'dupa'
+let moko = dupa.substr(0,dupa.length-1)
+console.log(moko)
 
 calc.forEach(action=>{
     action.addEventListener('click',() => {
@@ -64,17 +76,14 @@ function operate(a,b,run){
     run=runn
     if (run=='+'){
         enterNum=a+b
-        console.log (enterNum)
         display.textContent=enterNum
     }
     else if (run=='-'){
         enterNum=a-b
-        console.log (enterNum)
         display.textContent=enterNum
     }
     else if (run=='*'){
         enterNum=a*b
-        console.log (enterNum)
         display.textContent=enterNum
     }
     else if (run=='/'){
@@ -83,18 +92,13 @@ function operate(a,b,run){
         }
         else {
         enterNum=a/b
-        console.log (enterNum)
         display.textContent=enterNum
         }
     }
     addComma=0
     reset=1
-    console.log(`reset: ${reset}`)
     console.log(`first num: ${firstNum}`)
     console.log(`enter num: ${enterNum}`)
-    console.log(`a: ${a}`)
-    console.log(`b: ${b}`)
-
 }
 
 clear.addEventListener('click', function() {
