@@ -3,36 +3,61 @@ let display = document.querySelector('.display')
 let add = document.querySelector('.add')
 let equal = document.querySelector('.equal')
 let calc = document.querySelectorAll('.calc')
+let clear =document.querySelector('.clear')
+let comma =document.querySelector('.comma')
 
 let runn= 0
 let enterNum=0
 let firstNum=0;
 let output=0
 
-let reset=0
+let reset =0
+let addComma=0
+
 //Dodanie do wszystkich przyciskow liczbowych 
-butt.forEach(mum=>{
-    mum.addEventListener('click',() => {
-        enterNum=Number(mum.textContent)+enterNum*10
+butt.forEach(Num=>{
+    Num.addEventListener('click',() => {
+        if (reset==1){
+            firstNum=enterNum
+            enterNum=0
+            reset=0
+        }
+        if (addComma==1){
+            enterNum=Number(enterNum+Num.textContent);
+            console.log(`enterNum:${enterNum}`)
+        }
+        else if (addComma==0){
+            enterNum=Number(Num.textContent)+enterNum*10
+            console.log(`firstNum: ${firstNum}`)
+            console.log(`enterNum: ${enterNum}`) 
+         }
         display.textContent=enterNum
-        console.log(`firstNum: ${firstNum}`)
-        console.log(`enterNum: ${enterNum}`)  
-        
     })
 })
 
-//przycisk wybranego dzialania zapisuje pierwsza liczby i pozwala podac druga liczbe
-//poprzez wybranie odpowiedniego dzialania zapisuje wybrane dzialanie
+comma.addEventListener('click',() =>{
+    if (addComma==0){
+        enterNum=enterNum+`.`;  
+        display.textContent=enterNum;
+        addComma=1;
+        console.log(enterNum)
+}
+})
+
 calc.forEach(action=>{
-    action.addEventListener('click',()=> {
-        firstNum=enterNum;
-        enterNum=0
-        runn=action.textContent;
+    action.addEventListener('click',() => {
+        operate()
+        runn=action.textContent;           
     })
 })
-//przycisk dzialania ma dzialac rowniez jako '='
 
-//po klikniecu "=" uruchamia funkcje operate. Musi byc zapisana 1 i 2 liczba oraz rodzaj dzialania
+equal.addEventListener('click',() =>{
+    operate()
+    firstNum=enterNum;
+    enterNum=0
+}
+)
+
 function operate(a,b,run){
     a=firstNum;
     b=enterNum;
@@ -53,16 +78,18 @@ function operate(a,b,run){
         display.textContent=enterNum
     }
     else if (run=='/'){
+        if (b==0){
+            display.textContent='Error'
+        }
+        else {
         enterNum=a/b
         console.log (enterNum)
         display.textContent=enterNum
+        }
     }
-    else {
-        console.log('dupa')
-    }
-    
-    let reset=1
-
+    addComma=0
+    reset=1
+    console.log(`reset: ${reset}`)
     console.log(`first num: ${firstNum}`)
     console.log(`enter num: ${enterNum}`)
     console.log(`a: ${a}`)
@@ -70,5 +97,11 @@ function operate(a,b,run){
 
 }
 
-equal.addEventListener('click',operate)
+clear.addEventListener('click', function() {
+    firstNum=0;
+    enterNum=0;
+    finalNum=0;
+    display.textContent=0;
+})
+
 
