@@ -17,7 +17,6 @@ let afterEqual=0
 //Dodanie do wszystkich przyciskow liczbowych 
 butt.forEach(Num=>{
     Num.addEventListener('click',() => {
-        console.log(reset)
         if (reset==1){
             firstNum=enterNum
             enterNum=0
@@ -25,15 +24,33 @@ butt.forEach(Num=>{
         }
         if (addComma==1){
             enterNum=Number(enterNum+Num.textContent);
-            console.log(`enterNum:${enterNum}`)
         }
         else if (addComma==0){
             enterNum=Number(Num.textContent)+enterNum*10
-            console.log(`firstNum: ${firstNum}`)
-            console.log(`enterNum: ${enterNum}`) 
-         }
+        }
         display.textContent=enterNum
     })
+})
+
+document.addEventListener('keydown', (event) => {
+    var name = event.key;
+    if (name>=0 && name<=9){
+         if (reset==1){
+            firstNum=enterNum
+            enterNum=0
+            reset=0
+        }
+        if (addComma==1){
+            enterNum=Number(enterNum+name);
+        }
+        else if (addComma==0){
+            enterNum=Number(name)+enterNum*10
+        }
+        display.textContent=enterNum
+    }
+    else {
+        return
+     }   
 })
 
 comma.addEventListener('click',() =>{
@@ -64,16 +81,12 @@ calc.forEach(action=>{
 equal.addEventListener('click',() =>{
     operate()
     afterEqual=1;
-    console.log(`first num ${firstNum}`)
-    console.log(`enter num ${enterNum}`)
-}
-)
+})
 
 function operate(a,b,run){
     a=firstNum;
     b=enterNum;
     run=runn
-    console.log(`run:${run}`)
     if (run=='+'){
         enterNum=a+b
         display.textContent=enterNum
@@ -98,8 +111,6 @@ function operate(a,b,run){
     }
     addComma=0
     reset=1
-    console.log(`first num: ${firstNum}`)
-    console.log(`enter num: ${enterNum}`)
 }
 
 clear.addEventListener('click', function() {
